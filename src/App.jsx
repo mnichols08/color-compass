@@ -68,22 +68,18 @@ function App() {
   };
   return (
     <>
-      <div className="main-container">
-        <Header />
-        <MainSection />
-        {!buttonClicked && (
-          <InputSection
-            setters={setters}
-            handleChange={handleChange}
-            handleClick={handleClick}
-            formData={formDataRef.current}
-            hexColor={hexColor}
-            usageEmpty={usageEmpty}
-          />
-        )}
-        {buttonClicked && <ResultsSection colors={colors} prompt={prompt} />}
-        <Footer />
-      </div>
+      <Header />
+      <MainSection />
+      <InputSection
+        setters={setters}
+        handleChange={handleChange}
+        handleClick={handleClick}
+        formData={formDataRef.current}
+        hexColor={hexColor}
+        usageEmpty={usageEmpty}
+      />
+      <ResultsSection colors={colors} prompt={prompt} />
+      <Footer />
     </>
   );
 }
