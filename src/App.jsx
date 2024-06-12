@@ -1,5 +1,3 @@
-("use strict");
-import Groq from "groq-sdk";
 import { useState, useMemo, useEffect, useRef } from "react";
 import extractJSON from "./utils/extractJson";
 import ColorPicker from "./components/ColorPicker";
@@ -9,18 +7,7 @@ import MainSection from "./components/MainSection";
 import ResultsSection from "./components/ResultsSection";
 import InputSection from "./components/InputSection";
 import Footer from "./Footer";
-
-const groq = new Groq({
-  apiKey: import.meta.env.VITE_GROQ_API_KEY,
-  dangerouslyAllowBrowser: true, //I'm not sure if this is bad practice
-});
-
-// const options = {
-//   width: 422,
-//   height: 484,
-//   borderWidth: 4,
-//   borderColor: "#ffffff",
-// }; //options for color picker
+import askGroq from "./utils/groq";
 
 function App() {
   const [hexColor, setHexColor] = useState("#f00");
@@ -45,22 +32,11 @@ function App() {
 
   const handleClick = async () => {
     if (formDataRef.current.usage === "") {
-      // alert("Usage cannot be empty!");
       setUsageEmpty(true);
       return;
     }
     try {
-      const chatCompletion = await groq.chat.completions.create({
-        messages: [
-          {
-            role: "user",
-            content: `Provide a JSON Object that contains a color scheme of four colors generated from the hex code color ${hexColor}. The color scheme should help with ${formDataRef.current.colorScheme}. Provide details about why each color was picked. Ensure each color has a name and hex code and description with at least 30 characters. The color scheme must be used in refrence of ${formDataRef.current.usage}. The JSON object is an array of objects that contain the following properties: name, hex, description.`,
-          },
-        ],
-        model: "llama3-8b-8192",
-      });
-      const chatResponse = chatCompletion.choices[0]?.message?.content || ""; // This is the response from the chat model
-      const schemeObj = extractJSON(chatResponse); // This extracts the JSON object from the response
+      const schemeObj = await askGroq(hexColor, formDataRef);
       colorArrRef.current = schemeObj;
       setButtonClicked(true);
     } catch (error) {
