@@ -4,7 +4,13 @@ function NavItem({ text = "" }) {
   return (
     <div className="flex space-x-14 cursor-pointer">
       <a
-        href="#"
+        href={
+          text === "Home"
+            ? "/"
+            : text === "Get color"
+            ? "/colors"
+            : `/${text.toLowerCase()}`
+        }
         className=" text-md md:text-lg text-brand-green hover:text-brand-red
         hover:drop-shadow-link transition-all
         duration-500"
