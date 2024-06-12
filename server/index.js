@@ -23,7 +23,7 @@ async function returnNewImage(prompt,colors) {
     n: 1,
     size: "256x256", // restrict image size to 256x256 while developing
   }
-  if (!promptSize) return `https://via.placeholder.com/1024&text=ERROR%GETTING%20PROMPT`;
+  if (!promptObj) return `https://via.placeholder.com/1024&text=ERROR%20GETTING%20PROMPT`;
   const response = await openai.images.generate(promptObj);
   return response.data[0].url;
 }
