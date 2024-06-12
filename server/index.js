@@ -7,7 +7,7 @@ const app = express();
 const port = 3000;
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 async function returnNewImage(prompt,colors) {
@@ -21,9 +21,9 @@ async function returnNewImage(prompt,colors) {
     model: "dall-e-2", // use a smaller model while developing
     prompt: `Generate an image of a ${prompt} using the following colors: ${colors}`,
     n: 1,
-    size: "320x240", // restrict image size to 320x240 while developing
+    size: "256x256", // restrict image size to 256x256 while developing
   }
-  if (promptObj.size = "320x240" ) return `https://via.placeholder.com/1024&text=ERROR%20Invalid%20image%20dimensions`;
+  if (!promptSize) return `https://via.placeholder.com/1024&text=ERROR%GETTING%20PROMPT`;
   const response = await openai.images.generate(promptObj);
   return response.data[0].url;
 }
@@ -47,4 +47,3 @@ app.get('/v49/:key/:prompt/:colors', async (req, res) => {
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
-
