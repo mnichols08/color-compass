@@ -15,6 +15,7 @@ const options = {
 
 function InputSection({}) {
   const [hexColor, setHexColor] = useState("#f00");
+  const [buttonClicked, setButtonClicked] = useState(false);
   const [usageEmpty, setUsageEmpty] = useState(false);
   const [trigger, setTrigger] = useState(false);
   const formDataRef = useRef({
@@ -40,6 +41,7 @@ function InputSection({}) {
     }
     try {
       const schemeObj = await askGroq(hexColor, formDataRef);
+      setButtonClicked(true);
       colorArrRef.current = schemeObj;
     } catch (error) {
       console.error(error.message);
@@ -70,7 +72,7 @@ function InputSection({}) {
   };
   return (
     <>
-      <section className="bg-[url('/src/img/input-section-bg.png')] bg-cover bg-center w-full h-screen border-y border-secondary-color">
+      {!buttonClicked &&       <section className="bg-[url('/src/img/input-section-bg.png')] bg-cover bg-center w-full h-screen border-y border-secondary-color">
         <Wrapper>
           <div className="md:grow text-sm md:text-base block lg:flex w-full items-center space-y-1 text-center text-primary-dark mt-80">
             <div className="md:grow text-sm md:text-base flex flex-col items-center space-y-1 text-center text-primary-dark lg:w-1/2">
@@ -92,8 +94,8 @@ function InputSection({}) {
             </div>
           </div>
         </Wrapper>
-      </section>
-      <ResultsSection colors={colors} prompt={prompt} />
+      </section>}
+      {buttonClicked && <ResultsSection colors={colors} prompt={prompt} />}
     </>
   );
 }
