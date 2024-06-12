@@ -1,7 +1,11 @@
-import React from "react";
 import "./InputForm.css";
 
-export default function InputForm({ handleChange, formData, hexColor }) {
+export default function InputForm({
+  handleChange,
+  formData,
+  hexColor,
+  usageEmpty,
+}) {
   return (
     <div>
       <form>
@@ -10,24 +14,21 @@ export default function InputForm({ handleChange, formData, hexColor }) {
             <div>
               <button
                 style={{ width: "130px" }}
-                className="rounded-full border-white border-2 scheme-button"
-              >
+                className="rounded-full border-white border-2 scheme-button">
                 Analogue
               </button>
             </div>
             <div>
               <button
                 style={{ width: "130px" }}
-                className="rounded-full border-white border-2 scheme-button"
-              >
+                className="rounded-full border-white border-2 scheme-button">
                 Triadic
               </button>
             </div>
             <div>
               <button
                 style={{ width: "150px" }}
-                className="rounded-full border-white border-2 scheme-button"
-              >
+                className="rounded-full border-white border-2 scheme-button">
                 Complimentary
               </button>
             </div>
@@ -35,28 +36,21 @@ export default function InputForm({ handleChange, formData, hexColor }) {
           <div className="shadow-pink-50 flex justify-center mx-2.5 scheme-hexCodes-container">
             <div
               style={{ background: "#31D7BE", borderRadius: "40px 0 0 40px" }}
-              className="flex justify-center items-center border-white border-2 hex-codes"
-            >
+              className="flex justify-center items-center border-white border-2 hex-codes">
               {hexColor}
             </div>
             <div
               style={{ background: "#BE31D7" }}
-              className="flex justify-center items-center border-white border-2  hex-codes"
-            >
+              className="flex justify-center items-center border-white border-2  hex-codes">
               {hexColor}
             </div>
             <div
               style={{ background: "#D7BE31", borderRadius: " 0 40px 40px 0" }}
-              className="flex justify-center items-center border-white border-2 hex-codes"
-            >
+              className="flex justify-center items-center border-white border-2 hex-codes">
               {hexColor}
             </div>
           </div>
         </div>
-
-        {/* <label htmlFor="usage">
-          Describe where do you plan to use this color
-        </label> */}
         <div>
           <textarea
             className="rounded-xl shadow-lg p-3"
@@ -68,6 +62,7 @@ export default function InputForm({ handleChange, formData, hexColor }) {
             id="usage"
             value={formData.usage}
           />
+          {usageEmpty && <p style={{ color: "red" }}>This cannot be empty!</p>}
         </div>
       </form>
     </div>
