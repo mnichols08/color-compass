@@ -1,26 +1,53 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Wrapper from "./Wrapper";
 import FooterVoyager from "./FooterVoyager";
 
-// import data from './data/team.json'
-
 function Footer() {
+  const [isBottom, setIsBottom] = useState(false);
+  const footerRef = useRef(null);
+
+  const handleScroll = () => {
+    const bottom =
+      Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight;
+    setTimeout(() => setIsBottom(bottom), 1500);
+  };
+
+  const handleClickOutside = (event) => {
+    if (footerRef.current && !footerRef.current.contains(event.target)) {
+      setIsBottom(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <Wrapper>
-      <footer className="bg-primary-white h-[200px]  lg:h-[150px]">
-        <section className="flex justify-center p-4">
-          Check out our team's
-          <a
-            className="pl-[6px]"
-            href="https://github.com/chingu-voyages/v49-tier2-team-16"
-          >
-            Github Repository
-          </a>
-        </section>
-        <section className="lg:flex">
-          <section className="w-full grid grid-cols-3 gap-4 bg-primary-color p-1.5 lg:px-2.5">
-            <div className="">
-              <p className="text-brand-red"> Web Developers:</p>
+    <Wrapper className="relative min-h-screen">
+    <footer
+      ref={footerRef}
+      className={`transition-all duration-500 ease-in-out ${
+        isBottom ? "opacity-100 visible" : "opacity-0 invisible"
+      } relative inset-x-0 bottom-0 bg-primary-white`}
+    >
+      <section className="flex justify-center p-4">
+        Check out our team's
+        <a
+          className="pl-[6px]"
+          href="https://github.com/chingu-voyages/v49-tier2-team-16"
+        >
+          Github Repository
+        </a>
+      </section>
+      <section className="lg:flex">
+        <section className="w-full grid grid-cols-3 gap-4 bg-primary-color p-1.5 lg:px-2.5">
+          <div className="">
+            <p className="text-brand-red"> Web Developers:</p>
               <FooterVoyager
                 liUrl={"https://linkedin.com/in/mnix-dev"}
                 ghUrl={"https://github.com/mnichols08"}
@@ -102,10 +129,6 @@ function Footer() {
             </div>
           </section>
         </section>
-        {/* I'm not sure whose code this is so I commented it out */}
-        {/* {data.map((dev) => (
-          <p>{dev.name}</p>
-        ))} */}
       </footer>
     </Wrapper>
   );

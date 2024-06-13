@@ -38,11 +38,16 @@ export default {
           "0%": { transform: "translateX(50%)", opacity: 0 },
           "100%": { transform: "translateX(0)", opacity: 1 },
         },
+        slideInRight: {
+          "0%": { transform: "translateX(-50%)", opacity: 0 },
+          "100%": { transform: "translateX(0)", opacity: 1 },
+        },
       },
 
       animation: {
         arrowRotate: "arrowRotate 1.5s ease-in-out 1" /*infinite*/,
         slideIn: "slideIn 0.5s ease-out",
+        slideInRight: "slideInRight 0.5s ease-out",
       },
     },
   },

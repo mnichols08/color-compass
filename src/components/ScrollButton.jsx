@@ -5,7 +5,7 @@ function ScrollButton() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const routes = ["/", "/input", "/result"];
+  const routes = ["/", "/colors", "/result"];
   const currentPageIndex = routes.indexOf(location.pathname);
 
   const goBack = () => {

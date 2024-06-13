@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 import Groq from "groq-sdk";
 import extractJSON from "./extractJson";
 
