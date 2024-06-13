@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import MainSection from "./components/MainSection";
 import InputSection from "./components/InputSection";
-import Footer from "./Footer";
+import Footer from "./components/Footer";
 
 function App() {
   return (
