@@ -19,7 +19,7 @@ function MainSection() {
                 Phasellus mattis tortor ut tortor cursus, ac maximus tortor.
               </p>
               <Link
-                to='/input'
+                to='/colors'
                 className='animate-pulse hover:[animation-play-state:paused]'
               >
                 <div className='relative w-16 h-16 md:w-20 md:h-20 space-y-3 md:space-y-4'>

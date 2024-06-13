@@ -13,15 +13,15 @@ const options = {
   borderColor: "#ffffff",
 }; //options for color picker
 
-function InputSection({}) {
+function InputSection({setColors, setPrompt}) {
+
   const [hexColor, setHexColor] = useState("#f00");
-  const [buttonClicked, setButtonClicked] = useState(false);
-  const [usageEmpty, setUsageEmpty] = useState(false);
   const [trigger, setTrigger] = useState(false);
   const formDataRef = useRef({
     usage: "Coordinate colors for my outfit",
     colorScheme: "complimentary",
   });
+  const [promptState, setPromptState] = useState(formDataRef.current.usage);
   const colorArrRef = useRef([]);
   const promptRef = useRef(formDataRef.current.usage);
 
@@ -35,14 +35,11 @@ function InputSection({}) {
   const prompt = useMemo(() => promptRef.current, [promptRef.current]);
 
   const handleClick = async () => {
-    if (formDataRef.current.usage === "") {
-      setUsageEmpty(true);
-      return;
-    }
     try {
       const schemeObj = await askGroq(hexColor, formDataRef);
-      setButtonClicked(true);
       colorArrRef.current = schemeObj;
+      setColors(schemeObj);
+      setPrompt(promptState);
     } catch (error) {
       console.error(error.message);
     }
@@ -67,36 +64,28 @@ function InputSection({}) {
         [changedField]: newValue,
       };
       setTrigger((prev) => prev + 1);
-      setUsageEmpty(false);
+      setPromptState(newValue); // update the prompt state
     }
   };
   return (
-    <>
-      {!buttonClicked &&       <section className="bg-[url('/src/img/input-section-bg.png')] bg-cover bg-center w-full h-screen border-y border-secondary-color animate-slideIn">
-        <Wrapper>
-          <div className='md:grow text-sm md:text-base block lg:flex w-full items-center space-y-1 text-center text-primary-dark'>
-            <div className='md:grow text-sm md:text-base flex flex-col items-center space-y-1 text-center text-primary-dark lg:w-1/2'>
-              <ColorPicker options={options} setters={setters} />
-              <InputForm
-                handleChange={handleChange}
-                formData={formDataRef.current}
-                hexColor={hexColor}
-                usageEmpty={usageEmpty}
-              />
-            </div>
-
-            <div className='md:grow text-sm md:text-base flex flex-col items-center space-y-1 text-center text-primary-dark lg:w-1/2 block w-full h-full'>
-              <TextArea
-                handleChange={handleChange}
-                formData={formDataRef.current}
-                handleClick={handleClick}
-              />
-            </div>
+    <section className="bg-[url('/src/img/input-section-bg.png')] bg-cover bg-center w-full lg:h-[calc(100vh-60px)] border-y border-secondary-color animate-slideIn">
+      <Wrapper>
+        <div className="md:grow text-sm md:text-base block lg:flex w-full items-center space-y-1 text-center text-primary-dark">
+          <div className="md:grow text-sm md:text-base flex flex-col items-center space-y-1 text-center text-primary-dark lg:w-1/2">
+            <ColorPicker options={options} setters={setters} />
+            <InputForm hexColor={hexColor} formData={formDataRef}  />
           </div>
-        </Wrapper>
-      </section>}
-      {buttonClicked && <ResultsSection colors={colors} prompt={prompt} />}
-    </>
+
+          <div className="md:grow text-sm md:text-base flex flex-col items-center space-y-1 text-center text-primary-dark lg:w-1/2 block w-full h-full">
+            <TextArea
+              handleChange={handleChange}
+              handleClick={handleClick}
+              promptState={promptState}
+            />
+          </div>
+        </div>
+      </Wrapper>
+    </section>
   );
 }
 
