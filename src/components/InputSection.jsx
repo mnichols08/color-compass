@@ -4,12 +4,13 @@ import Wrapper from "./Wrapper";
 import ColorPicker from "./ColorPicker";
 import InputForm from "./InputForm";
 import TextArea from "./TextArea";
+import { randomPrompt } from "../utils/randomItem";
 
 function InputSection({ setColors, setPrompt }) {
   const [hexColor, setHexColor] = useState("#f00");
   const [trigger, setTrigger] = useState(false);
   const formDataRef = useRef({
-    usage: "Coordinate colors for my outfit",
+    usage: randomPrompt,
     colorScheme: "complimentary",
   });
   const [promptState, setPromptState] = useState(formDataRef.current.usage);
@@ -63,7 +64,7 @@ function InputSection({ setColors, setPrompt }) {
   }, [hexColor])
   return (
     <section className="bg-[url('/src/img/input-section-bg.png')] bg-cover bg-center w-full lg:h-[calc(100vh-60px)] border-y border-secondary-color animate-slideIn">
-      <div style={{background: bg }} className="container font-display m-auto flex items-center justify-center h-screen sm:mt-5">
+      <div style={{background: bg }} className="font-display m-auto flex items-center justify-center h-screen sm:mt-5">
         <Wrapper>
           <div className="md:grow text-sm md:text-base block lg:flex w-full items-center space-y-1 text-center text-primary-dark ">
             <div className="md:grow text-sm md:text-base flex flex-col items-center space-y-1 text-center text-primary-dark lg:w-1/2">
