@@ -12,24 +12,20 @@ function App() {
   const [prompt, setPrompt] = useState("");
   return (
     <>
-      <div className="main-container translate-x-0">
-        <Header />
-        <Routes>
-          <Route path="/" element={<MainSection />} />
-          <Route
-            path="/colors"
-            element={
-              <InputSection setColors={setColors} setPrompt={setPrompt} />
-            }
-          />
-          <Route
-            path="/result"
-            element={<ResultsSection colors={colors} prompt={prompt} />}
-          />
-        </Routes>
-        <ScrollButton />
-        <Footer />
-      </div>
+      <Header />
+      <Routes>
+        <Route path="/" element={<MainSection />} />
+        <Route
+          path="/colors"
+          element={<InputSection setColors={setColors} setPrompt={setPrompt} />}
+        />
+        <Route
+          path="/result"
+          element={<ResultsSection colors={colors} prompt={prompt} />}
+        />
+      </Routes>
+      <ScrollButton />
+      <Footer />
     </>
   );
 }
