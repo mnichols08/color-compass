@@ -7,7 +7,7 @@ const generateImgURL = async (prompt, colors) => {
   colors = colors.toString().replace(/\s/g, "+");
   try {
     if (!prompt || !colors) {
-      throw new Error("Prompt and colors are required");
+      console.warn("Prompt and colors are required");
     }
     if (!KEY) {
       throw new Error(
