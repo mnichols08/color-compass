@@ -4,12 +4,13 @@ import {
   randomIntro,
   randomQuestion,
   randomTitle,
+  randomCallToAction,
 } from "../utils/randomItem";
 
 function TextArea({ handleClick, handleChange, promptState }) {
   return (
-    <div className="flex flex-col space-y-2 py-20 bg-white">
-      <h1 className="text-4xl font-bold sticky -mt-32 text-orange-500">
+    <div className="flex flex-col space-y-2 py-20 bg-white sm:pt-20">
+      <h1 className="text-4xl font-bold sticky lg:-mt-32 text-orange-500">
         {randomTitle}
       </h1>
 
@@ -44,7 +45,7 @@ function TextArea({ handleClick, handleChange, promptState }) {
         onClick={handleClick}
         className="w-2/5 py-3 px-5 bg-white text-brand-green border border-green-500 rounded-full hover:bg-brand-green hover:text-white mx-auto"
       >
-        Get Recommendations
+        {randomCallToAction}
       </Link>
     </div>
   );
