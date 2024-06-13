@@ -4,9 +4,10 @@ import CompassArrow from "/src/img/compass-arrow.svg";
 import CompassCircle from "/src/img/compass-circle.svg";
 
 function MainSection() {
+  
   return (
     <main>
-      <section className="bg-[url('/src/img/main-section-bg.jpg')] bg-cover bg-center w-full h-[calc(100vh-60px)] border-y border-secondary-color animate-slideIn">
+      <section className="bg-[url('/src/img/main-section-bg.jpg')] bg-cover bg-center w-full h-[calc(100vh-60px)] border-y border-secondary-color animate-slideInRight">
         <Wrapper>
           <div className='relative h-[calc(100vh-60px)] flex justify-center items-center'>
             <div className='text-sm md:text-base flex flex-col items-center space-y-1 text-center text-primary-dark'>
