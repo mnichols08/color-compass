@@ -4,17 +4,9 @@ import Wrapper from "./Wrapper";
 import ColorPicker from "./ColorPicker";
 import InputForm from "./InputForm";
 import TextArea from "./TextArea";
-import ResultsSection from "./ResultsSection";
 
-const options = {
-  width: 422,
-  height: 484,
-  borderWidth: 4,
-  borderColor: "#ffffff",
-}; //options for color picker
 
-function InputSection({setColors, setPrompt}) {
-
+function InputSection({ setColors, setPrompt }) {
   const [hexColor, setHexColor] = useState("#f00");
   const [trigger, setTrigger] = useState(false);
   const formDataRef = useRef({
@@ -69,22 +61,24 @@ function InputSection({setColors, setPrompt}) {
   };
   return (
     <section className="bg-[url('/src/img/input-section-bg.png')] bg-cover bg-center w-full lg:h-[calc(100vh-60px)] border-y border-secondary-color animate-slideIn">
-      <Wrapper>
-        <div className="md:grow text-sm md:text-base block lg:flex w-full items-center space-y-1 text-center text-primary-dark">
-          <div className="md:grow text-sm md:text-base flex flex-col items-center space-y-1 text-center text-primary-dark lg:w-1/2">
-            <ColorPicker options={options} setters={setters} />
-            <InputForm hexColor={hexColor} formData={formDataRef}  />
-          </div>
+      <div style={{ background: hexColor }}>
+        <Wrapper>
+          <div className="md:grow text-sm md:text-base block lg:flex w-full items-center space-y-1 text-center text-primary-dark">
+            <div className="md:grow text-sm md:text-base flex flex-col items-center space-y-1 text-center text-primary-dark lg:w-1/2">
+              <ColorPicker setters={setters} />
+              <InputForm hexColor={hexColor} formData={formDataRef} />
+            </div>
 
-          <div className="md:grow text-sm md:text-base flex flex-col items-center space-y-1 text-center text-primary-dark lg:w-1/2 block w-full h-full">
-            <TextArea
-              handleChange={handleChange}
-              handleClick={handleClick}
-              promptState={promptState}
-            />
+            <div className="md:grow text-sm md:text-base flex flex-col items-center space-y-1 text-center text-primary-dark lg:w-1/2 block w-full h-full">
+              <TextArea
+                handleChange={handleChange}
+                handleClick={handleClick}
+                promptState={promptState}
+              />
+            </div>
           </div>
-        </div>
-      </Wrapper>
+        </Wrapper>
+      </div>
     </section>
   );
 }
