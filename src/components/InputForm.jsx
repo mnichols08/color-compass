@@ -9,8 +9,8 @@ export default function InputForm({
   return (
     <div>
       <form>
-        <div className="scheme-container bg-primary-color space-y-2.5 my-3 py-2.5">
-          <div className="flex justify-center mx-2.5 gap-x-0.5 scheme-buttons-container">
+        <div className='scheme-container bg-primary-color space-y-2.5 my-3 py-2.5'>
+          <div className='flex justify-center mx-2.5 gap-x-0.5 scheme-buttons-container'>
             <div>
               <button
                 style={{ width: "130px" }}
@@ -36,7 +36,7 @@ export default function InputForm({
               </button>
             </div>
           </div>
-          <div className="shadow-pink-50 flex justify-center mx-2.5 scheme-hexCodes-container">
+          <div className='shadow-pink-50 flex justify-center mx-2.5 scheme-hexCodes-container'>
             <div
               style={{ background: "#31D7BE", borderRadius: "40px 0 0 40px" }}
               className="flex justify-center items-center border-white border-2 hex-codes"
