@@ -23,20 +23,34 @@ async function returnNewImage(prompt,colors) {
     n: 1,
     size: "256x256", // restrict image size to 256x256 while developing
   }
-  if (!promptObj) return `https://via.placeholder.com/1024&text=ERROR%20GETTING%20PROMPT`;
-  const response = await openai.images.generate(promptObj);
-  return response.data[0].url;
+  
+  if (!promptObj) return
+  try {
+    const response = await openai.images.generate(promptObj);
+    return response.data[0].url;
+  } catch (error) {
+    if (error.response && error.response.status === 429) {
+      console.error('API limit reached');
+      return `https://via.placeholder.com/1024&text=API%20limit%20reached`;
+    } else {
+      throw error;
+    }
+  }
+  
 }
 
 app.use(cors());
 
 app.get('/v49/:key/:prompt/:colors', async (req, res) => {
+  let placeholderImg;
   if (!req.params.prompt || !req.params.colors) {
-    return res.status(400).send('Prompt and colors are required');
+    placeholderImg = `https://via.placeholder.com/1024&text=Missing%20Prompt%20or%20Colors`
+    console.error('Missing or incorrectly set BACKEND_API_KEY environment variable')
+    return res.status(400).json(placeholderImg);
   }
   const {prompt, colors} = req.params;
   if (req.params.key !== process.env.BACKEND_API_KEY) {
-    const placeholderImg = `https://via.placeholder.com/1024&text=Unauthorized%20Request`
+    placeholderImg = `https://via.placeholder.com/1024&text=Unauthorized%20Request`
     console.error('Missing or incorrectly set BACKEND_API_KEY environment variable')
     return res.status(401).json(placeholderImg);
   }
