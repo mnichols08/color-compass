@@ -9,7 +9,7 @@ function Footer() {
   const handleScroll = () => {
     const bottom =
       Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight;
-    setTimeout(() => setIsBottom(bottom), 3500);
+    setTimeout(() => setIsBottom(bottom), 1500);
   };
 
   const handleClickOutside = (event) => {
@@ -28,26 +28,26 @@ function Footer() {
   }, []);
 
   return (
-<Wrapper>
-      <footer
-        ref={footerRef}
-        className={`transition-all duration-500 ease-in-out ${
-          isBottom ? "opacity-100 visible" : "opacity-0 invisible"
-        } fixed inset-x-0 bottom-0 bg-primary-white h-[200px] lg:h-[150px]`}
-      >
-               <section className="flex justify-center p-4">
-          Check out our team's
-          <a
-            className="pl-[6px]"
-            href="https://github.com/chingu-voyages/v49-tier2-team-16"
-          >
-            Github Repository
-          </a>
-        </section>
-        <section className="lg:flex">
-          <section className="w-full grid grid-cols-3 gap-4 bg-primary-color p-1.5 lg:px-2.5">
-            <div className="">
-              <p className="text-brand-red"> Web Developers:</p>
+    <Wrapper className="relative min-h-screen">
+    <footer
+      ref={footerRef}
+      className={`transition-all duration-500 ease-in-out ${
+        isBottom ? "opacity-100 visible" : "opacity-0 invisible"
+      } relative inset-x-0 bottom-0 bg-primary-white`}
+    >
+      <section className="flex justify-center p-4">
+        Check out our team's
+        <a
+          className="pl-[6px]"
+          href="https://github.com/chingu-voyages/v49-tier2-team-16"
+        >
+          Github Repository
+        </a>
+      </section>
+      <section className="lg:flex">
+        <section className="w-full grid grid-cols-3 gap-4 bg-primary-color p-1.5 lg:px-2.5">
+          <div className="">
+            <p className="text-brand-red"> Web Developers:</p>
               <FooterVoyager
                 liUrl={"https://linkedin.com/in/mnix-dev"}
                 ghUrl={"https://github.com/mnichols08"}
