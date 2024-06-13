@@ -1,6 +1,7 @@
 import React from "react";
 import ImageGenerator from "./ImageGenerator";
 import DisplayColours from "./DisplayColours";
+import { randomThankYou } from "../utils/randomItem";
 
 function ResultsSection({ colors, prompt }) {
   return (
@@ -12,7 +13,7 @@ function ResultsSection({ colors, prompt }) {
           </h2>
           <div className='flex flex-col items-center'>
             <h3 className='text-center w-full pb-4'>
-              Thank you for choosing Color Compass.
+              {randomThankYou}
             </h3>
             <p className='text-center w-full pb-4'>
               <strong>{prompt}</strong>
