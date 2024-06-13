@@ -1,14 +1,41 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Wrapper from "./Wrapper";
 import FooterVoyager from "./FooterVoyager";
 
-// import data from './data/team.json'
-
 function Footer() {
+  const [isBottom, setIsBottom] = useState(false);
+  const footerRef = useRef(null);
+
+  const handleScroll = () => {
+    const bottom =
+      Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight;
+    setTimeout(() => setIsBottom(bottom), 3500);
+  };
+
+  const handleClickOutside = (event) => {
+    if (footerRef.current && !footerRef.current.contains(event.target)) {
+      setIsBottom(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <Wrapper>
-      <footer className="bg-primary-white h-[200px]  lg:h-[150px]">
-        <section className="flex justify-center p-4">
+<Wrapper>
+      <footer
+        ref={footerRef}
+        className={`transition-all duration-500 ease-in-out ${
+          isBottom ? "opacity-100 visible" : "opacity-0 invisible"
+        } fixed inset-x-0 bottom-0 bg-primary-white h-[200px] lg:h-[150px]`}
+      >
+               <section className="flex justify-center p-4">
           Check out our team's
           <a
             className="pl-[6px]"
@@ -102,10 +129,6 @@ function Footer() {
             </div>
           </section>
         </section>
-        {/* I'm not sure whose code this is so I commented it out */}
-        {/* {data.map((dev) => (
-          <p>{dev.name}</p>
-        ))} */}
       </footer>
     </Wrapper>
   );
