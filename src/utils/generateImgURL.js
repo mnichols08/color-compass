@@ -10,9 +10,8 @@ const generateImgURL = async (prompt, colors) => {
       console.warn("Prompt and colors are required");
     }
     if (!KEY) {
-      throw new Error(
-        "API Key is required. Please set the BACKEND_API_KEY environment variable."
-      );
+      console.warn("Missing or incorrectly set BACKEND_API_KEY environment variable");
+      return `https://via.placeholder.com/1024/${colors[0]}/${color[1]}}&text=Error%20Generating%20Image`;
     }
     import.meta.env.MODE === "production"
       ? (url = await fetch(
