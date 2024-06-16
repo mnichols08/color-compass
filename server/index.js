@@ -33,7 +33,8 @@ async function returnNewImage(prompt,colors) {
       console.error('API limit reached');
       return `https://via.placeholder.com/1024&text=API%20limit%20reached`;
     } else {
-      throw error;
+      console.error('Error generating image', error);
+      return `https://via.placeholder.com/1024&text=Error%20Generating%20Image`;
     }
   }
   
