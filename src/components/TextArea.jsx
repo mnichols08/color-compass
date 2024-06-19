@@ -3,11 +3,20 @@ import {
   randomMessage,
   randomIntro,
   randomQuestion,
-  randomTitle,
   randomCallToAction,
+  randomTitle,
 } from "../utils/randomItem";
 
-function TextArea({ handleClick, handleChange, promptState }) {
+import { hexToHSL, hexToRGB } from "../utils/colorConverters";
+
+function TextArea({ handleClick, hexColor, handleChange, promptState }) {
+  const checkIfEmpty = () => {
+    if (promptState === "") {
+      return false;
+    } else {
+      return handleClick();
+    }
+  };
   const usageState = promptState === "";
   return (
     <div className="flex flex-col space-y-2 py-20 bg-white sm:pt-20">
@@ -22,9 +31,9 @@ function TextArea({ handleClick, handleChange, promptState }) {
         {randomMessage}
       </p>
 
-      <p className="text-green-600">HEX: #b19cd9</p>
-      <p className="text-green-600">RGB: rgb(177, 156, 217)</p>
-      <p className="text-green-600">HSL: hsl(261, 45%, 73%)</p>
+      <p className="text-green-600">HEX: {hexColor}</p>
+      <p className="text-green-600">RGB: {hexToRGB(hexColor)}</p>
+      <p className="text-green-600">HSL: {hexToHSL(hexColor)}</p>
 
       <label
         className="block text-base font-semibold mb-1 w-2/3 mx-auto"
@@ -43,13 +52,15 @@ function TextArea({ handleClick, handleChange, promptState }) {
         value={promptState}
       />
       {usageState && <p className="text-brand-red">Cannot be empty! </p>}
-      <Link
-        to="/result"
-        onClick={handleClick}
-        className="py-3 px-7 bg-transparent text-brand-green border border-brand-green rounded-full hover:bg-primary-color hover:text-brand-red hover:border-brand-red hover:shadow-shape mx-auto transition-all duration-500"
-      >
-        {randomCallToAction}
-      </Link>
+      {usageState || (
+        <Link
+          to="/result"
+          onClick={checkIfEmpty}
+          className="py-3 px-7 bg-transparent text-brand-green border border-brand-green rounded-full hover:bg-primary-color hover:text-brand-red hover:border-brand-red hover:shadow-shape mx-auto transition-all duration-500"
+        >
+          {randomCallToAction}
+        </Link>
+      )}
     </div>
   );
 }

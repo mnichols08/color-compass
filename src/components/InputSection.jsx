@@ -24,8 +24,7 @@ function InputSection({ setColors, setPrompt }) {
     promptRef.current = formDataRef.current.usage;
   }, [formDataRef.current.usage]);
 
-  const handleClick = async (e) => {
-    e.preventDefault();
+  const handleClick = async () => {
     try {
       const schemeObj = await askGroq(hexColor, formDataRef);
       colorArrRef.current = schemeObj;
@@ -62,10 +61,13 @@ function InputSection({ setColors, setPrompt }) {
   useEffect(() => {
     bg = `linear-gradient(45deg,${hexColor}60, ${hexColor}06)`;
     document.body.style.background = bg;
-  }, [hexColor])
+  }, [hexColor]);
   return (
     <section className="bg-[url('/src/img/input-section-bg.png')] bg-cover bg-center w-full lg:h-[calc(100vh-60px)] border-y border-secondary-color animate-slideIn">
-      <div style={{background: bg }} className="font-display m-auto flex items-center justify-center h-screen">
+      <div
+        style={{ background: bg }}
+        className="font-display m-auto flex items-center justify-center h-screen"
+      >
         <Wrapper>
           <div className="md:grow text-sm md:text-base block lg:flex w-full items-center space-y-1 text-center text-primary-dark ">
             <div className="md:grow text-sm md:text-base flex flex-col items-center space-y-1 text-center text-primary-dark lg:w-1/2">
@@ -76,8 +78,9 @@ function InputSection({ setColors, setPrompt }) {
             <div className="md:grow text-sm md:text-base flex flex-col items-center space-y-1 text-center text-primary-dark lg:w-1/2 block w-full h-full">
               <TextArea
                 handleChange={handleChange}
-                handleClick={handleClick}
                 promptState={promptState}
+                handleClick={handleClick}
+                hexColor={hexColor}
               />
             </div>
           </div>
