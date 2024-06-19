@@ -24,7 +24,8 @@ function InputSection({ setColors, setPrompt }) {
     promptRef.current = formDataRef.current.usage;
   }, [formDataRef.current.usage]);
 
-  const handleClick = async () => {
+  const handleClick = async (e) => {
+    e.preventDefault();
     try {
       const schemeObj = await askGroq(hexColor, formDataRef);
       colorArrRef.current = schemeObj;
