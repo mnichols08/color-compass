@@ -33,18 +33,20 @@ function TextArea({ handleClick, handleChange, promptState }) {
         {randomQuestion}
       </label>
       <textarea
-        id='usage'
-        name='usage'
-        className='w-2/3 max-h-48 px-3 py-2 resize-none overflow-y-auto border border-primary-white rounded-[20px] shadow-shape focus:outline-none mx-auto bg-primary-color'
-        rows='4'
+        required
+        placeholder="Give us some context about your color needs..."
+        id="usage"
+        name="usage"
+        className="w-2/3 max-h-48 px-3 py-2 resize-none overflow-y-auto border border-primary-white rounded-[20px] shadow-shape focus:outline-none mx-auto bg-primary-color"
+        rows="4"
         onChange={handleChange}
         value={promptState}
       />
-      {usageState && <p className='text-brand-red'>Cannot be empty! </p>}
+      {usageState && <p className="text-brand-red">Cannot be empty! </p>}
       <Link
         to="/result"
         onClick={handleClick}
-        className='py-3 px-7 bg-transparent text-brand-green border border-brand-green rounded-full hover:bg-primary-color hover:text-brand-red hover:border-brand-red hover:shadow-shape mx-auto transition-all duration-500'
+        className="py-3 px-7 bg-transparent text-brand-green border border-brand-green rounded-full hover:bg-primary-color hover:text-brand-red hover:border-brand-red hover:shadow-shape mx-auto transition-all duration-500"
       >
         {randomCallToAction}
       </Link>
