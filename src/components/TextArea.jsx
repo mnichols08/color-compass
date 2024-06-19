@@ -8,6 +8,7 @@ import {
 } from "../utils/randomItem";
 
 function TextArea({ handleClick, handleChange, promptState }) {
+  const usageState = promptState === "";
   return (
     <div className="flex flex-col space-y-2 py-20 bg-white sm:pt-20">
       <h1 className="text-4xl font-bold sticky lg:-mt-32 text-orange-500">
@@ -39,7 +40,7 @@ function TextArea({ handleClick, handleChange, promptState }) {
         onChange={handleChange}
         value={promptState}
       />
-      {usageEmpty && <p className='text-brand-red'>Cannot be empty! </p>}
+      {usageState && <p className='text-brand-red'>Cannot be empty! </p>}
       <Link
         to="/result"
         onClick={handleClick}

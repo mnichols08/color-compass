@@ -23,19 +23,19 @@ export default function InputForm({ hexColor }) {
       </div>
       <div className='flex justify-center mx-2.5 text-primary-white'>
         <div
-          style={{ background: "#31D7BE", borderRadius: "40px 0 0 40px" color: setContrastText(hexColor)}}
+          style={{ background: "#31D7BE", borderRadius: "40px 0 0 40px", color: setContrastText(hexColor)}}
           className='flex justify-center items-center w-[140px] h-10 border-white border-2 hex-codes'
         >
           {hexColor}
         </div>
         <div
-          style={{ background: "#BE31D7" color: setContrastText(hexColor)}}
+          style={{ background: "#BE31D7", color: setContrastText(hexColor)}}
           className='flex justify-center items-center w-[140px] h-10 border-white border-2  hex-codes'
         >
           {hexColor}
         </div>
         <div
-          style={{ background: "#D7BE31", borderRadius: " 0 40px 40px 0" color: setContrastText(hexColor)}}
+          style={{ background: "#D7BE31", borderRadius: " 0 40px 40px 0", color: setContrastText(hexColor)}}
           className='flex justify-center items-center w-[140px] h-10 border-white border-2 hex-codes'
         >
           {hexColor}
